@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">desafio04</string>
+    <string name="worst_team">desafio04</string>
+    <string name="to_tassio">Para a infelicidade do professor, após pressionar o botão será informado o pior time do Brasil e o número de vezes que foi rebaixado!</string>
+    <string name="cruzeiro_b">Este não é apenas o pior time do estado de Minas Gerais, como também é o pior time do Brasil!</string>
+</resources>
