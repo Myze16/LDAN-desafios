@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Money Tass</string>
+    <string name="i_tax">Tax</string>
+    <string name="i_date">Date</string>
+    <string name="i_amount">Amount</string>
+    <string name="result">Result</string>
+    <string name="calculate">Calculate</string>
+</resources>
