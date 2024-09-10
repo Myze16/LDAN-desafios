@@ -7,20 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.app.DatePickerDialog;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import java.util.Calendar;
 import java.sql.Timestamp;
 import java.time.Duration;
-import java.time.Instant;
+import java.util.Date;
 
 public class HomeActivity extends Activity {
-    public long timestamp;
-    public long daysToFinalDate;
     EditText datePicker;
-    public String daysToEnd;
+    public long daysToEnd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,7 +25,6 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.home);
 
         datePicker = findViewById(R.id.date);
-
         datePicker.setOnClickListener(v -> showDatePickerDialog());
     }
 
@@ -38,17 +34,11 @@ public class HomeActivity extends Activity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                HomeActivity.this,
-                (view, yearSelected, monthOfYear, dayOfMonth) -> {
-                    String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + yearSelected;
-                    Date date = new Date(yearSelected, monthOfYear, dayOfMonth);
-                    Date currentDate = new Date();
-                    int teste = date.getHours() - currentDate.getHours();
-                    HomeActivity.this.timestamp = teste;
-                    datePicker.setText(selectedDate);
-                },
-                year, month, day);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(HomeActivity.this, (view, yearSelected, monthOfYear, dayOfMonth) -> {
+            String selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + yearSelected;
+            HomeActivity.this.daysToEnd = Duration.between(new Timestamp(System.currentTimeMillis()).toInstant(), new Timestamp(new Date(yearSelected - 1900, monthOfYear, dayOfMonth).getTime()).toInstant()).toDays();
+            datePicker.setText(selectedDate);
+        }, year, month, day);
 
         datePickerDialog.show();
     }
@@ -64,19 +54,13 @@ public class HomeActivity extends Activity {
                 EditText iTax = findViewById(R.id.tax);
                 double amount = Double.parseDouble(iAmount.getText().toString());
                 double tax = Double.parseDouble(iTax.getText().toString());
-                //double result = HomeActivity.this.calculateCDI(amount, tax, HomeActivity.this.timestamp);
-                TextView teste = findViewById(R.id.result_text);
-                teste.setText(String.valueOf(HomeActivity.this.timestamp));
 
-//                Intent resultCDI = new Intent(HomeActivity.this, ResultActivity.class);
-//                resultCDI.putExtra("result", result);
-//                startActivity(resultCDI);
+                Intent resultCDI = new Intent(HomeActivity.this, ResultActivity.class);
+                resultCDI.putExtra("tax", tax);
+                resultCDI.putExtra("amount", amount);
+                resultCDI.putExtra("days", HomeActivity.this.daysToEnd);
+                startActivity(resultCDI);
             }
         });
-    }
-
-    private double calculateCDI(double amount, double tax, long date) {
-
-        return 0.1; //array dos valores
     }
 }
