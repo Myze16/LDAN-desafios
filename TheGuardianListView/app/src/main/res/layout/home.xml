@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="#9999999"
+        android:elevation="2dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <ImageView
+            android:id="@+id/toolbar_image"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/search_circle_icon"
+            android:layout_gravity="start"
+            android:layout_marginHorizontal="12dp"/>
+
+        <ImageView
+            android:id="@+id/toolbar_image"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/the_guardian_logo"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="12dp"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>
