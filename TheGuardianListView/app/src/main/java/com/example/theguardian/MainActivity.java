@@ -1,15 +1,14 @@
 package com.example.theguardian;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
@@ -26,11 +25,18 @@ public class MainActivity extends Activity {
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            // fazer aparecer outra tela quando clicar aqui
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 News news = allNews.get(position);
-                Toast.makeText(MainActivity.this, news.getName() + "/" + news.getAge() + " anos", Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(MainActivity.this, NewsActivity.class);
+                intent.putExtra("title", news.getTitle());
+                intent.putExtra("subtitle", news.getSubtitle());
+                intent.putExtra("description", news.getDescription());
+                intent.putExtra("imageResourceId", news.getImageResourceId());
+                intent.putExtra("time", news.getTime());
+
+                startActivity(intent);
             }
         });
     }

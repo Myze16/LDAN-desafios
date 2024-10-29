@@ -26,13 +26,16 @@ public class NewsAdapter extends ArrayAdapter<News> {
         }
         News currentNews = getItem(position);
 
-        // list_news layout precisa estar de acordo com aqui
-        TextView nameTextView = convertView.findViewById(R.id.contactName);
-        TextView ageTextView = convertView.findViewById(R.id.contactAge);
-        ImageView imageView = convertView.findViewById(R.id.contactImage);
-        nameTextView.setText(currentNews.getName());
+        TextView titleTextView = convertView.findViewById(R.id.listNewsTitle);
+        TextView subtitleTextView = convertView.findViewById(R.id.listNewsSubtitle);
+        TextView timeTextView = convertView.findViewById(R.id.listNewsTime);
+        ImageView imageView = convertView.findViewById(R.id.listNewsImage);
+
+        titleTextView.setText(currentNews.getTitle());
+        subtitleTextView.setText(currentNews.getSubtitle());
+        timeTextView.setText(currentNews.getTime() + "min ago");
         imageView.setImageResource(currentNews.getImageResourceId());
-        ageTextView.setText(currentNews.getAge() + "min ago");
+
         return convertView;
     }
 }
